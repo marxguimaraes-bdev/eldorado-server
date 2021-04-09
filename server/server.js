@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const { api: config } = require('../config');
-const { categoryRouter } = require('./routes');
+const { categoryRouter, deviceRouter } = require('./routes');
 
 const app = express();
 
@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/category', categoryRouter);
+app.use('/device', deviceRouter);
 
 // TODO: Set default handler for other reqs
 
