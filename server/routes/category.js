@@ -1,15 +1,17 @@
 const express = require('express');
+const { validate } = require('express-validation');
 
 const { categoryController } = require('../controller');
+const { categorySchema, idSchema } = require('../validation');
 
 const categoryRouter = express.Router();
 
 categoryRouter.route('/')
   .get(categoryController.getAll)
-  .post(categoryController.post);
+  .post(validate(categorySchema), categoryController.post);
 
 categoryRouter.route('/:id')
-  .get(categoryController.get)
-  .delete(categoryController.delete);
+  .get(validate(idSchema), categoryController.get)
+  .delete(validate(idSchema), categoryController.delete);
 
 module.exports = categoryRouter;

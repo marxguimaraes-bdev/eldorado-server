@@ -1,4 +1,5 @@
 const express = require('express');
+const { ValidationError } = require('express-validation');
 const bodyParser = require('body-parser');
 
 const { api: config } = require('../config');
@@ -14,7 +15,13 @@ app.use(bodyParser.json());
 app.use('/category', categoryRouter);
 app.use('/device', deviceRouter);
 
-// TODO: Set default handler for other reqs
+app.use((err, req, res, next) => {
+  if (err instanceof ValidationError) {
+    return res.status(err.statusCode).json(err)
+  }
+
+  return res.status(500).json(err)
+});
 
 app.listen(config.port);
 console.log(`API ready for requests on port ${config.port}`);
