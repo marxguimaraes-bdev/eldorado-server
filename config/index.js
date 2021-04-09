@@ -7,4 +7,7 @@ module.exports = {
     password: process.env.RDS_PASSWORD,
     port: 3306,
   },
+  api: {
+    port: 1234,
+  },
 };
