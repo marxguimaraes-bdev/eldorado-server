@@ -13,7 +13,6 @@ categoryRouter.route('/')
 
 categoryRouter.route('/:id')
   .options(optionsController.handler)
-  .get(validate(idSchema), categoryController.get)
   .delete(validate(idSchema), categoryController.delete);
 
 module.exports = categoryRouter;

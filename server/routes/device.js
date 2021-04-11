@@ -13,7 +13,6 @@ deviceRouter.route('/')
 
 deviceRouter.route('/:id')
   .options(optionsController.handler)
-  .get(validate(idSchema), deviceController.get)
   .delete(validate(idSchema), deviceController.delete);
 
 module.exports = deviceRouter;
