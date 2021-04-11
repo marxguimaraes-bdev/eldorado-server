@@ -41,6 +41,10 @@ const categoryController = {
     } catch (err) {
       console.error(err.message || err);
 
+      if (err.code === 'ER_ROW_IS_REFERENCED_2') {
+        return res.status(400).send(`This category can't be deleted`);
+      }
+
       return res
         .status(err.httpCode || 500)
         .send(err.message || 'Something went wrong');
