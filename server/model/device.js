@@ -8,7 +8,19 @@ const deviceModel = {
     const queryResult = await mysqlClient.execute(query);
 
     if (queryResult.length) {
-      return queryResult;
+      const fetchCategories = queryResult.map(
+        (dev) => categoryModel.getCategory(dev.categoryId)
+        .then(category => ({
+          id: dev.id,
+          color: dev.color,
+          category: category.name,
+          partNumber: dev.partNumber,
+        }))
+      );
+
+      // wait for all categories to be fetched
+      const result = await Promise.all(fetchCategories);
+      return result;
     }
 
     const err = new Error('No devices found');
