@@ -23,10 +23,7 @@ const deviceModel = {
       return result;
     }
 
-    const err = new Error('No devices found');
-    err.code = 404;
-
-    throw err;
+    return [];
   },
 
   async createdevice({ color, categoryId, partNumber}) {

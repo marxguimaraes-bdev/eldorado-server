@@ -27,10 +27,7 @@ const categoryModel = {
       return queryResult;
     }
 
-    const err = new Error('No categories found');
-    err.httpCode = 404;
-
-    throw err;
+    return [];
   },
 
   async createCategory(name) {
